@@ -43,42 +43,37 @@ import { defineComponent, computed, PropType, ref, unref, isRef, isProxy, isReac
 import InputGroupDropdown from '../InputGroupDropdown.vue'
 import { CssCategory } from '../../@enums/CssCategory'
 import { CssProperty } from '../../@types/CssProperty'
+import { CssVariant } from '../../@types/CssVariant'
 
 export default defineComponent({
   name: 'StylesForm',
   components: { InputGroupDropdown },
   props: {
-    data: { type: Object as PropType<Record<string, CssProperty>>, required: true },
+    data: { type: Object as PropType<CssVariant>, required: true },
     tabId: String as PropType<string>
   },
   setup (props, { emit }) {
-    const modelValue = ref(Object.keys(props.data).reduce((acc, key) => {
+    const modelValue = ref(Object.keys(props.data?.cssVars ?? []).reduce((acc, key) => {
       acc[key] = {
-        value: props.data[key].value,
-        unit: props.data[key].unit
+        value: props.data.cssVars[key].value,
+        unit: props.data.cssVars[key].unit
       }
 
       return acc
     }, {} as any))
     const groups = computed(() => {
-      const propsList: Record<CssCategory, { id: string, value: CssProperty }[]> = {
-        [CssCategory.SIZE]: [],
-        [CssCategory.SPACING]: [],
-        [CssCategory.POSITION]: [],
-        [CssCategory.TYPOGRAPHY]: [],
-        [CssCategory.BACKGROUNDS]: [],
-        [CssCategory.BORDERS]: [],
-        [CssCategory.EFFECTS]: []
-      }
+      const propsList: { [key: string]: { id: string, value: CssProperty }[] } = {}
 
       if (props.data) {
-        Object.keys(props.data).forEach((key, i) => {
-          const prop = props.data[key]
+        Object.keys(props.data.cssVars).forEach((key, i) => {
+          const prop = props.data.cssVars[key]
           const category = prop.category
 
-          if (propsList[category]) {
-            propsList[category].push({ id: key, value: prop })
+          if (!propsList[category]) {
+            propsList[category] = []
           }
+
+          propsList[category].push({ id: key, value: prop })
         })
       }
 
@@ -94,7 +89,7 @@ export default defineComponent({
     })
 
     watch(modelValue.value, (value) => {
-      emit('update:modelValue', value)
+      emit('update:modelValue', props.tabId ,value)
     }, { deep: true })
 
     return {

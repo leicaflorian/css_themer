@@ -7,13 +7,14 @@ import ComponentShow from './views/projects/components/Show.vue'
 
 const routes = [
   { path: '/', component: HomeIndex },
-  { path: '/projects', component: ProjectsIndex },
+  { path: '/projects', component: ProjectsIndex, name: 'projects.index' },
   {
-    path: '/projects/:id', component: ProjectsShow,
+    path: '/projects/:id', component: ProjectsShow, name: 'projects.show',
     children: [
       {
-        path: 'component/:id',
-        component: ComponentShow
+        path: 'component/:cId',
+        component: ComponentShow,
+        name: 'projects.components.show',
       }
     ]
   }

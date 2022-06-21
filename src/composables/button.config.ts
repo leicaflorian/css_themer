@@ -1,7 +1,6 @@
 import { CssProperty } from '../@types/CssProperty'
 import { CssUnit } from '../@enums/CssUnit'
 import { CssCategory } from '../@enums/CssCategory'
-import { CssVariant } from '../@types/CssVariant'
 import { CssComponent } from '../@types/CssComponent'
 
 const basicVars: Record<string, CssProperty> = {
@@ -45,7 +44,7 @@ const variantVars: Record<string, CssProperty> = {
   'btn-border-color': { type: 'color', value: '', category: CssCategory.BORDERS },
   'btn-hover-color': { type: 'color', value: '', category: CssCategory.TYPOGRAPHY },
   'btn-hover-bg': { type: 'color', value: '', category: CssCategory.BACKGROUNDS },
-  'btn-hover-border-color:': { type: 'color', value: '', category: CssCategory.BORDERS },
+  'btn-hover-border-color': { type: 'color', value: '', category: CssCategory.BORDERS },
   'btn-focus-shadow-rgb': { type: 'color', value: '', category: CssCategory.EFFECTS },
   'btn-active-color': { type: 'color', value: '', category: CssCategory.TYPOGRAPHY },
   'btn-active-bg': { type: 'color', value: '', category: CssCategory.BACKGROUNDS },
@@ -56,23 +55,121 @@ const variantVars: Record<string, CssProperty> = {
   'btn-disabled-border-color': { type: 'color', value: '', category: CssCategory.BORDERS }
 }
 
-export const buttonConfig: CssComponent = {
+export const button: CssComponent = {
   id: 'button',
+  name: 'Button',
   variants: [
     {
-      id: 'basic',
+      id: 'small',
+      name: 'Small',
       isBasicVariant: true,
       isCustomVariant: false,
+      htmlTag: 'button',
+      cssClass: 'btn btn-sm',
+      cssVars: basicVars
+    }, {
+      id: 'basic',
+      name: 'Basic',
+      isBasicVariant: true,
+      isCustomVariant: false,
+      htmlTag: 'button',
       cssClass: 'btn',
       cssVars: basicVars
     }, {
+      id: 'large',
+      name: 'Large',
+      isBasicVariant: true,
+      isCustomVariant: false,
+      htmlTag: 'button',
+      cssClass: 'btn btn-lg',
+      cssVars: basicVars
+    }, {
       id: 'primary',
+      name: 'Primary',
+      htmlTag: 'button',
       isBasicVariant: false,
       isCustomVariant: false,
       cssClass: 'btn-primary',
       cssVars: variantVars
+    }, {
+      id: 'secondary',
+      name: 'Secondary',
+      htmlTag: 'button',
+      isBasicVariant: false,
+      isCustomVariant: false,
+      cssClass: 'btn-secondary',
+      cssVars: variantVars
+    }, {
+      id: 'success',
+      name: 'Success',
+      htmlTag: 'button',
+      isBasicVariant: false,
+      isCustomVariant: false,
+      cssClass: 'btn-success',
+      cssVars: variantVars
+    }, {
+      id: 'danger',
+      name: 'Danger',
+      htmlTag: 'button',
+      isBasicVariant: false,
+      isCustomVariant: false,
+      cssClass: 'btn-danger',
+      cssVars: variantVars
+    }, {
+      id: 'warning',
+      name: 'Warning',
+      htmlTag: 'button',
+      isBasicVariant: false,
+      isCustomVariant: false,
+      cssClass: 'btn-warning',
+      cssVars: variantVars
+    }, {
+      id: 'info',
+      name: 'Info',
+      htmlTag: 'button',
+      isBasicVariant: false,
+      isCustomVariant: false,
+      cssClass: 'btn-info',
+      cssVars: variantVars
+    }, {
+      id: 'light',
+      name: 'Light',
+      htmlTag: 'button',
+      isBasicVariant: false,
+      isCustomVariant: false,
+      cssClass: 'btn-light',
+      cssVars: variantVars
+    }, {
+      id: 'dark',
+      name: 'Dark',
+      htmlTag: 'button',
+      isBasicVariant: false,
+      isCustomVariant: false,
+      cssClass: 'btn-dark',
+      cssVars: variantVars
+    }, {
+      id: 'link',
+      name: 'Link',
+      htmlTag: 'button',
+      isBasicVariant: false,
+      isCustomVariant: false,
+      cssClass: 'btn-link',
+      cssVars: variantVars
+    },{
+      id: 'pink',
+      name: 'Pink',
+      htmlTag: 'button',
+      isBasicVariant: false,
+      isCustomVariant: false,
+      cssClass: 'btn-pink',
+      cssVars: variantVars,
+      modelValue: {
+        'btn-color': { type: 'color', value: 'pink', category: CssCategory.TYPOGRAPHY },
+        
+      }
     }
   ]
 }
 
-export default { basicVars, variantVars }
+
+// TODO:: Create a function that can load default styles for a component from bootstrap css

@@ -1,17 +1,14 @@
 <template>
-  <div>
 
-    <div class="d-flex">
-      <div class="flex-fill">
-        <h2>dettagli componente scelto</h2>
+  <div class="d-flex h-100">
+    <div class="flex-fill d-flex flex-column">
+      <h2 class="flex-shrink-0">dettagli componente scelto</h2>
 
-        <div class="preview-container">
-          USARE PINIA PER SALVARE NELL STORE IL COMPONENTE ATTUALEMNTE ATTIVO CON LE SUE CONFIGURAZIONI
-          E POI GENERARE DI CONSEGUENZA LA SIDEBAR CON LE VARIANTI E LA PREVIE CON I VARI COMPONENTI
-        </div>
+      <div class="preview-container flex-fill">
+        <component-preview :project-id="projectId" :component-id="compId"></component-preview>
       </div>
-      <the-component-sidebar componentId="button"></the-component-sidebar>
     </div>
+    <the-component-sidebar :projectId="projectId" :componentId="compId"></the-component-sidebar>
   </div>
 </template>
 
@@ -19,19 +16,21 @@
 import { defineComponent, onMounted } from 'vue'
 import TheComponentSidebar from '../../../components/admin/TheComponentSidebar.vue'
 import { useComponentStore } from '../../../stores/componentStore'
-import buttonConfig from '../../../composables/button.config'
+import { button as buttonConfig } from '../../../composables/button.config'
+import { useRoute } from 'vue-router'
+import ComponentPreview from '../../../components/admin/ComponentPreview.vue'
 
 export default defineComponent({
   name: 'ComponentShow',
-  components: { TheComponentSidebar },
+  components: { ComponentPreview, TheComponentSidebar },
   setup () {
-    const componentStore = useComponentStore()
+    const projectId = useRoute().params.id as string
+    const compId = useRoute().params.cId as string
 
-    onMounted(() => {
-      componentStore.setActiveComponent(buttonConfig)
-    })
-
-    return {}
+    return {
+      compId,
+      projectId
+    }
   }
 })
 </script>
@@ -42,9 +41,12 @@ export default defineComponent({
   min-height: 200px;
   padding: 2rem;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
   align-items: center;
+  overflow: auto;
+  background-color: #e9ebef;
+
 }
 </style>

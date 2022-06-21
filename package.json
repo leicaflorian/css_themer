@@ -1,5 +1,5 @@
 {
-  "name": "css-configurator",
+  "name": "css_themer",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -8,8 +8,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/uuid": "^8.3.4",
     "bootstrap": "^5.2.0-beta1",
     "pinia": "^2.0.14",
+    "uuid": "^8.3.2",
     "vue": "^3.2.25",
     "vue-router": "4"
   },

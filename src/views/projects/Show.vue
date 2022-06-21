@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex">
+  <div class="d-flex h-100">
     <the-sidebar></the-sidebar>
 
     <div class="flex-fill">
